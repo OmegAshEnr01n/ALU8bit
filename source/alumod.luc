@@ -7,6 +7,7 @@ module alumod (
   comparator comparer(.vin(adderorsubtractor.vout), .zin(adderorsubtractor.zout), .nin(adderorsubtractor.nout), .in(inne));
   bitshift shiftbits(.in(inne));
   multiplier multiplime(.in(inne));
+  not notout(.in(inne));
   always {
     case(inne[2][5:0]){
     
@@ -25,7 +26,13 @@ module alumod (
     //IF use OR THEN 011110 is input
     6b011110:out = boolme.out;      
     //IF use XOR THEN 010110 is input
-    6b010110:out = boolme.out;            
+    6b010110:out = boolme.out;           
+    //IF use XNOR THEN 011001 is input
+    6b011001:out = boolme.out;
+    //IF use NAND THEN 010111 is input
+    6b010111:out = boolme.out;
+    //IF use NOT THEN 011111 is input
+    6b011111:out = notout.out;
     //IF use SHL THEN 100000 is input
     6b100000:out = shiftbits.out;            
     //IF use SHR THEN 100001 is input

@@ -1,0 +1,23 @@
+module mojo_top (
+    input clk,             
+    input rst_n,            
+    output io_led [3][8],   
+    input io_dip [3][8]     
+  ) {
+  
+  alumod alu;
+  sig rst;                  
+  
+  .clk(clk) {
+    reset_conditioner reset_cond;
+    
+  }
+  always {
+    reset_cond.in = ~rst_n; 
+    rst = reset_cond.out;  
+    io_led = 3x{{8h00}};   
+    alu.inne = io_dip;
+    io_led[2] = alu.out;
+    
+  }
+}
